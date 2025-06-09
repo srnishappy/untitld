@@ -14,11 +14,10 @@ const renderError = (error: unknown): { message: string } => {
 };
 export const createProfileAction = async (prev: any, formData: FormData) => {
   try {
-    const user = await getAuthUser();
+    const user = await currentUser();
+    if (!user) throw new Error('Unauthorized');
     const rawData = Object.fromEntries(formData);
     const validateField = validateWithZod(profileSchema, rawData);
-    // console.log('validateField', validateField);
-    // return { message: 'success' };
     await db.profile.create({
       data: {
         clerkId: user.id,
@@ -33,6 +32,24 @@ export const createProfileAction = async (prev: any, formData: FormData) => {
         hasProfile: true,
       },
     });
+  } catch (error) {
+    console.log(error);
+    return renderError(error);
+  }
+  redirect('/');
+};
+
+export const createLandMarkAction = async (
+  prev: any,
+  formData: FormData
+): Promise<{ message: string }> => {
+  try {
+    const user = await currentUser();
+    if (!user) throw new Error('Unauthorized');
+    const rawData = Object.fromEntries(formData);
+    console.log(rawData);
+    return { message: 'success' };
+    // const validateField = validateWithZod(profileSchema, rawData);
   } catch (error) {
     console.log(error);
     return renderError(error);
