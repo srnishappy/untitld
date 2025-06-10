@@ -11,7 +11,6 @@ type FormInputProps = {
 
 const FormInput = (props: FormInputProps) => {
   const { name, type, label, placeholder, defaultValue } = props;
-  console.log(name);
 
   return (
     <div className="mb-4">

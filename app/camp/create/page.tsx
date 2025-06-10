@@ -2,6 +2,7 @@ import FormInput from '@/components/form/FormInput';
 import { SubmitButton } from '@/components/form/Button';
 import FormContainer from '@/components/form/FormContainer';
 import { createLandMarkAction } from '@/action/action';
+import CategoryInput from '@/components/form/CategoryInput';
 
 const CreateProfile = async () => {
   return (
@@ -16,6 +17,8 @@ const CreateProfile = async () => {
               type="text"
               placeholder="Landmark Name"
             />
+            {/* Category */}
+            <CategoryInput />
           </div>
           <SubmitButton text="Create" size="lg" />
         </FormContainer>
